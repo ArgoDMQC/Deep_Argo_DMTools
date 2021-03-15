@@ -176,7 +176,7 @@ if isempty(pres_argo)==0 & isempty(pres_ref)==0
     plot(delta_psal_SBE,pres_argo,'+b')
     plot(delta_psal_DM,pres_argo,'*r')
     plot(delta_psal_DEF,pres_argo,'og')
-    title({[ floatname ': Salinity deviation from the deployement CTD'];['effect of the Cpcor correction']},'Fontsize',12)
+    title({[ floatname ': Salinity deviation from the deployement CTD'];['Effect of the Cpcor correction only (M_new=1)']},'Fontsize',12)
     xlabel('Salinity deviation','Fontsize',12)
     legend({'Original  profile : CPcor_SBE  (-9.57e-8) , cell gain=1',['Modified profile: CPcor_new (' num2str(CPcor_new) '), cell gain=1'],['Modified profile: CPcor_new - default value (' num2str(CPcor_DEF) '),   cell gain=1']},'location','SouthOutside','Fontsize',8,'interpreter','none')
     ylabel('pressure','Fontsize',12)
