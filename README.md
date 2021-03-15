@@ -1,6 +1,7 @@
 # DM_CPcor : Obtain a refined estimate of Cpcor_new in delayed mode
 This matlab code gives a refined estimate of Cpcor_new for a float by comparing a Deep-Argo profile to a reference profile
-(e.g. deployment CTD casts). This refined value can be used to correct a pressure-dependant salinity bias for the Deep Argo floats.
+(e.g. deployment CTD casts). Algorithm is based on Brian King's one. 
+The refined Cpcor value can be used to correct a pressure-dependant salinity bias for the Deep Argo floats.
 See [Quality Control Manual, section 3.8](https://archimer.ifremer.fr/doc/00228/33951/) for more details.
 
 
