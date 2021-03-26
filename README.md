@@ -27,6 +27,6 @@ See [Quality Control Manual, section 3.8](https://archimer.ifremer.fr/doc/00228/
     </pre>
   - `[CPcor_new, M_new] = COMPUTE_new_cpcor_brian(6901601)`  will give the refined estimate of CPcor value (CPcor_new) and a conductivity cell gain factor (M_new)
 
-The following figure gives the result obtained for the float 6901601. CPcor_SBE is the nominal CPcor value provided by SBE, CPcor_new is the refined estimate and CPcor_new (default) is the new CPcor value that can be used for Deep SBE-41CP data if no other information is available in delayed mode.
+The following figure gives the result obtained for the float 6901601. CPcor_SBE is the nominal CPcor value provided by SBE, CPcor_new is the refined estimate and CPcor_new (default) is the standard CPcor value recommended for Deep SBE-41CP data.
 
 ![6901601](https://user-images.githubusercontent.com/38859979/111129069-f0a5d600-8575-11eb-8e96-d7be5439607d.png)
