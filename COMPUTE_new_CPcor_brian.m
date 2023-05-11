@@ -41,6 +41,11 @@ CPcor_DEF = CPcor_DEF_SBE41;
 %  which can degrade the comparison between the deployment ctd and the argo profile.
 minPRESS = 1000;
 
+% only use reference data that are within +/- MAX_P_DELTA dbar from float data when
+% interpolating psal_ref onto float conservative temperature levels
+%--------------------------------------------------------------------------
+MAX_P_DELTA=250;
+
 
 
 %1. Load Argo data (e.g. 1st ascending profile if deep enough)
@@ -116,11 +121,13 @@ if isempty(pres_argo)==0 & isempty(pres_ref)==0
     % and the conductivity that the float should have used to calculate and report practical salinity that is in agreement with reference data:
     cond_expected = gsw_C_from_SP(psal_ref_i',temp_argo_corr,pres_argo_corr);
     
+    % difference of pressure   %change CC 05/09/2022
+    okdiffP = abs(pres_ref_i'-pres_argo_corr)< MAX_P_DELTA;
     
     % 7. Levels selection
     %---------------------
-    kok = find(pres_argo_corr > minPRESS & isfinite(cond_expected));
-    
+    %kok = find(pres_argo_corr > minPRESS & isfinite(cond_expected);
+    kok = find(pres_argo_corr > minPRESS & isfinite(cond_expected)& okdiffP);  %change CC 05/09/2022
     
     % 8. Solve least square problem to get optimized values of CPcor and M (from B.King)
     %---------------------------------------------------------------------
@@ -173,10 +180,10 @@ if isempty(pres_argo)==0 & isempty(pres_ref)==0
     hold on
     grid on
     box on
-    plot(delta_psal_SBE,pres_argo,'+b')
-    plot(delta_psal_DM,pres_argo,'*r')
-    plot(delta_psal_DEF,pres_argo,'og')
-    title({[ floatname ': Salinity deviation from the deployement CTD'];['Effect of the Cpcor correction only (M_new=1)']},'Fontsize',12)
+    plot(delta_psal_SBE(okdiffP),pres_argo(okdiffP),'+b')
+    plot(delta_psal_DM(okdiffP),pres_argo(okdiffP),'*r')
+    plot(delta_psal_DEF(okdiffP),pres_argo(okdiffP),'og')
+    title({[ floatname ': Salinity deviation from the deployement CTD'];['Effect of the Cpcor correction only (M_new=1)']},'Fontsize',12,'interpreter','none')
     xlabel('Salinity deviation','Fontsize',12)
     legend({'Original  profile : CPcor_SBE  (-9.57e-8) , cell gain=1',['Modified profile: CPcor_new (' num2str(CPcor_new) '), cell gain=1'],['Modified profile: CPcor_new - default value (' num2str(CPcor_DEF) '),   cell gain=1']},'location','SouthOutside','Fontsize',8,'interpreter','none')
     ylabel('pressure','Fontsize',12)
