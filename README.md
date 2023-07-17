@@ -1,5 +1,5 @@
 # Deep_Argo_Tools
-This repository contains tools to process deep-Argo floats in delayed time.
+This repository contains tools to process deep-Argo floats in delayed-mode
 
 - **DM_CPCor**
   
